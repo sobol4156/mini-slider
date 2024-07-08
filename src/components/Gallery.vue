@@ -9,22 +9,16 @@ const recommend = ref([])
 
 onMounted(async () => {
   try {
-    const response = await fetchProducts();
-    console.log(response)
-    products.value = response;
+    const responseProd = await fetchProducts();
+    const responseReccom = await fetchRecommend();
+
+    products.value = responseProd;
+    recommend.value = responseReccom;
   } catch (error) {
     console.error(error);
   }
 });
-onMounted(async () => {
-  try {
-    const response = await fetchRecommend();
-    console.log(response)
-    recommend.value = response;
-  } catch (error) {
-    console.error(error);
-  }
-});
+
 </script>
 
 <template>

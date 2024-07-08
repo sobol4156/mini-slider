@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 
-interface Recommend {
-  name: string;
-  downloads: string;
-  tags: string[];
-  id: string;
-}
+import { Recommend } from '../interfaces/Reccommend';
 
 const props = defineProps<{
   recommends: Recommend[];

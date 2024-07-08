@@ -2,26 +2,14 @@
 import { onMounted, ref } from "vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
+
+import {Product} from '../interfaces/Product'
+
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const modules = [Navigation, Pagination];
-
-interface GalleryPhoto {
-  photo1: string;
-  photo2: string;
-  photo3: string;
-  photo4: string;
-  photo5: string;
-}
-
-interface Product {
-  title: string;
-  description: string;
-  galleryPhoto: GalleryPhoto;
-  id: string;
-}
 
 const props = defineProps<{
   products: Product[];
