@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { onMounted, ref } from "vue";
+
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
 
@@ -7,10 +9,36 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const modules = [Navigation, Pagination];
+
+interface GalleryPhoto {
+  photo1: string;
+  photo2: string;
+  photo3: string;
+  photo4: string;
+  photo5: string;
+}
+
+interface Product {
+  title: string;
+  description: string;
+  galleryPhoto: GalleryPhoto;
+  id: string;
+}
+
+const props = defineProps<{
+  products: Product[];
+}>();
+
+const product = ref<Product | undefined>(undefined);
+onMounted(()=> {
+  product.value  = props.products[0]
+})
+
+
 </script>
 
 <template>
-  <article class="product">
+  <article v-if="product" class="product">
     <div class="product__gallery">
       <swiper
         :slides-per-view="1"
@@ -20,47 +48,48 @@ const modules = [Navigation, Pagination];
         :pagination="true"
       >
         <swiper-slide>
-          <img class="swiper_main-img" src="/public/img/gallery/1.webp" alt=""
-        /></swiper-slide>
-        <swiper-slide
-          ><img class="swiper_main-img" src="/public/img/gallery/2.webp" alt=""
-        /></swiper-slide>
-        <swiper-slide
-          ><img class="swiper_main-img" src="/public/img/gallery/3.webp" alt=""
-        /></swiper-slide>
-        <swiper-slide
-          ><img class="swiper_main-img" src="/public/img/gallery/4.webp" alt=""
-        /></swiper-slide>
-        <swiper-slide
-          ><img class="swiper_main-img" src="/public/img/gallery/5.webp" alt=""
-        /></swiper-slide>
+          <img
+            class="swiper_main-img"
+            :src="product.galleryPhoto.photo1"
+            alt=""
+          />
+        </swiper-slide>
+        <swiper-slide>
+          <img class="swiper_main-img" :src="product.galleryPhoto.photo2" alt="" />
+        </swiper-slide>
+        <swiper-slide>
+          <img class="swiper_main-img" :src="product.galleryPhoto.photo3" alt="" />
+        </swiper-slide>
+        <swiper-slide>
+          <img class="swiper_main-img" :src="product.galleryPhoto.photo4" alt="" />
+        </swiper-slide>
+        <swiper-slide>
+          <img class="swiper_main-img" :src="product.galleryPhoto.photo5" alt="" />
+        </swiper-slide>
       </swiper>
       <ul class="product__gallery-list">
         <li class="product__gallery-item">
-          <picture> <img src="/public/img/gallery/2.webp" alt="" /></picture>
+          <picture><img :src="product.galleryPhoto.photo2" alt="" /></picture>
         </li>
         <li class="product__gallery-item">
-          <picture> <img src="/public/img/gallery/3.webp" alt="" /></picture>
+          <picture><img :src="product.galleryPhoto.photo3" alt="" /></picture>
         </li>
         <li class="product__gallery-item">
-          <picture> <img src="/public/img/gallery/4.webp" alt="" /> </picture>
+          <picture><img :src="product.galleryPhoto.photo4" alt="" /></picture>
         </li>
         <li class="product__gallery-item">
-          <picture> <img src="/public/img/gallery/5.webp" alt="" /></picture>
+          <picture><img :src="product.galleryPhoto.photo5" alt="" /></picture>
         </li>
       </ul>
     </div>
     <div class="product__text">
-      <h1 class="product__title">Modification name</h1>
-      <p class="product__description">
-        Description: Are you ready to embark on the wildest bureaucratic
-        adventure of your life, do you have a passion for enforcing regulations
-        that nobody asked for: Then buckle up, because the Bureau of Land
-        Mismanagement is looking for its next Ranger to join our illustrious
-        team of paper-pushing eco-warriors!
-      </p>
+      <h1 class="product__title">{{ product.title }}</h1>
+      <p class="product__description">{{ product.description }}</p>
     </div>
   </article>
+  <div v-else>
+    <p>Loading...</p>
+  </div>
 </template>
 
 <style scoped>
@@ -130,6 +159,5 @@ const modules = [Navigation, Pagination];
   .product__text {
     max-width: 694px;
   }
-
 }
 </style>

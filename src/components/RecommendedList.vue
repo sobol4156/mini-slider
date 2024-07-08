@@ -1,5 +1,26 @@
+<script setup lang="ts">
+import { onMounted, ref } from 'vue';
+
+
+interface Recommend {
+  name: string;
+  downloads: string;
+  tags: string[];
+  id: string;
+}
+
+const props = defineProps<{
+  recommends: Recommend[];
+}>();
+
+const recommend = ref<Recommend | undefined>(undefined);
+onMounted(()=> {
+  recommend.value  = props.recommends[0]
+})
+</script>
+
 <template>
-  <article class="recommended">
+  <article v-if="recommend" class="recommended">
     <div class="recommended__header">
       <h2 class="recommended__header-title">Recommend</h2>
       <span class="recommended__header-span">See all</span>
@@ -13,29 +34,13 @@
             alt=""
           />
           <ul class="recommended__item-tag-list">
-            <li class="recommended__item-tag-item">
+            <li v-for="(tag, index) in recommend.tags"  :key="index" class="recommended__item-tag-item">
               <img
                 class="recommended__item-tag-image"
                 src="/public/svg/tag.svg"
                 alt=""
               />
-              <span class="recommended__item-tag-span">subscription+</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">sky</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">textures</span>
+              <span class="recommended__item-tag-span">{{ tag }}</span>
             </li>
           </ul>
           <div class="recommended__item-addition">
@@ -45,7 +50,7 @@
                 src="/public/img/recommend/downloads.webp"
                 alt=""
               />
-              <span class="recommended__item-downloads-span">15.000</span>
+              <span class="recommended__item-downloads-span">{{ recommend.downloads }}</span>
             </div>
             <div class="recommended__item-favourites">
               <img
@@ -61,29 +66,13 @@
       <li class="recommended__item">
         <div class="recommended__item-content item-2">
           <ul class="recommended__item-tag-list">
-            <li class="recommended__item-tag-item">
+            <li v-for="(tag, index) in recommend.tags"  :key="index" class="recommended__item-tag-item">
               <img
                 class="recommended__item-tag-image"
                 src="/public/svg/tag.svg"
                 alt=""
               />
-              <span class="recommended__item-tag-span">subscription+</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">sky</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">textures</span>
+              <span class="recommended__item-tag-span">{{ tag }}</span>
             </li>
           </ul>
           <div class="recommended__item-addition">
@@ -93,7 +82,7 @@
                 src="/public/img/recommend/downloads.webp"
                 alt=""
               />
-              <span class="recommended__item-downloads-span">15.000</span>
+              <span class="recommended__item-downloads-span">{{ recommend.downloads }}</span>
             </div>
             <div class="recommended__item-favourites">
               <img
@@ -114,29 +103,13 @@
             alt=""
           />
           <ul class="recommended__item-tag-list">
-            <li class="recommended__item-tag-item">
+            <li v-for="(tag, index) in recommend.tags"  :key="index" class="recommended__item-tag-item">
               <img
                 class="recommended__item-tag-image"
                 src="/public/svg/tag.svg"
                 alt=""
               />
-              <span class="recommended__item-tag-span">subscription+</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">sky</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">textures</span>
+              <span class="recommended__item-tag-span">{{ tag }}</span>
             </li>
           </ul>
           <div class="recommended__item-addition">
@@ -146,7 +119,7 @@
                 src="/public/img/recommend/downloads.webp"
                 alt=""
               />
-              <span class="recommended__item-downloads-span">15.000</span>
+              <span class="recommended__item-downloads-span">{{ recommend.downloads }}</span>
             </div>
             <div class="recommended__item-favourites">
               <img
@@ -162,29 +135,13 @@
       <li class="recommended__item">
         <div class="recommended__item-content item-4">
           <ul class="recommended__item-tag-list">
-            <li class="recommended__item-tag-item">
+            <li v-for="(tag, index) in recommend.tags"  :key="index" class="recommended__item-tag-item">
               <img
                 class="recommended__item-tag-image"
                 src="/public/svg/tag.svg"
                 alt=""
               />
-              <span class="recommended__item-tag-span">subscription+</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">sky</span>
-            </li>
-            <li class="recommended__item-tag-item">
-              <img
-                class="recommended__item-tag-image"
-                src="/public/svg/tag.svg"
-                alt=""
-              />
-              <span class="recommended__item-tag-span">textures</span>
+              <span class="recommended__item-tag-span">{{ tag }}</span>
             </li>
           </ul>
           <div class="recommended__item-addition">
@@ -194,7 +151,7 @@
                 src="/public/img/recommend/downloads.webp"
                 alt=""
               />
-              <span class="recommended__item-downloads-span">15.000</span>
+              <span class="recommended__item-downloads-span">{{ recommend.downloads }}</span>
             </div>
             <div class="recommended__item-favourites">
               <img
@@ -211,7 +168,7 @@
   </article>
 </template>
 
-<script setup lang="ts"></script>
+
 
 <style scoped>
 .recommended__header {
