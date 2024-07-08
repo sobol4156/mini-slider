@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from "vue";
-
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination } from "swiper/modules";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -30,11 +28,9 @@ const props = defineProps<{
 }>();
 
 const product = ref<Product | undefined>(undefined);
-onMounted(()=> {
-  product.value  = props.products[0]
-})
-
-
+onMounted(() => {
+  product.value = props.products[0];
+});
 </script>
 
 <template>
@@ -55,16 +51,32 @@ onMounted(()=> {
           />
         </swiper-slide>
         <swiper-slide>
-          <img class="swiper_main-img" :src="product.galleryPhoto.photo2" alt="" />
+          <img
+            class="swiper_main-img"
+            :src="product.galleryPhoto.photo2"
+            alt=""
+          />
         </swiper-slide>
         <swiper-slide>
-          <img class="swiper_main-img" :src="product.galleryPhoto.photo3" alt="" />
+          <img
+            class="swiper_main-img"
+            :src="product.galleryPhoto.photo3"
+            alt=""
+          />
         </swiper-slide>
         <swiper-slide>
-          <img class="swiper_main-img" :src="product.galleryPhoto.photo4" alt="" />
+          <img
+            class="swiper_main-img"
+            :src="product.galleryPhoto.photo4"
+            alt=""
+          />
         </swiper-slide>
         <swiper-slide>
-          <img class="swiper_main-img" :src="product.galleryPhoto.photo5" alt="" />
+          <img
+            class="swiper_main-img"
+            :src="product.galleryPhoto.photo5"
+            alt=""
+          />
         </swiper-slide>
       </swiper>
       <ul class="product__gallery-list">
@@ -92,7 +104,7 @@ onMounted(()=> {
   </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
 .swiper {
   max-width: 694px;
   margin-bottom: 40px;
@@ -100,41 +112,45 @@ onMounted(()=> {
 .product {
   display: flex;
   gap: 20px;
+
+  &__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  &__title {
+    font-size: 46px;
+    line-height: 52px;
+    margin: 0;
+  }
+
+  &__description {
+    font-size: 26px;
+    line-height: 32px;
+    padding: 0;
+    color: var(--secondary-gray);
+  }
+
+  &__gallery-list {
+    display: flex;
+    padding: 0;
+    gap: 20px;
+    justify-content: space-between;
+    list-style-type: none;
+  }
+
+  &__gallery-item {
+    cursor: pointer;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
 }
 
-.product__text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.product__title {
-  font-size: 46px;
-  line-height: 52px;
-  margin: 0;
-}
-.product__description {
-  font-size: 26px;
-  line-height: 32px;
-  padding: 0;
-  color: var(--secondary-gray);
-}
-.product__gallery-list {
-  display: flex;
-  padding: 0;
-  gap: 20px;
-  justify-content: space-between;
-}
-.product__gallery-list {
-  list-style-type: none;
-}
-.product__gallery-item {
-  cursor: pointer;
-}
-.product__gallery-item img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
 .swiper_main-img {
   max-width: 694px;
   max-height: 380px;
@@ -142,22 +158,25 @@ onMounted(()=> {
   height: auto;
   display: block;
 }
+
 .swiper-slide {
   height: auto;
   display: block;
 }
 
-@media (width<1440px) {
+@media (max-width: 1440px) {
   .swiper-slide {
     width: 100% !important;
   }
+
   .product {
     flex-direction: column;
     align-items: center;
-  }
-  .product__gallery-list,
-  .product__text {
-    max-width: 694px;
+
+    &__gallery-list,
+    &__text {
+      max-width: 694px;
+    }
   }
 }
 </style>
